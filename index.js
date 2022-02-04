@@ -15,12 +15,12 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
     accessToken: 'pk.eyJ1Ijoic2FoYXktc2F1cmFiaCIsImEiOiJja3o3OWl0N3owamZpMm5uOXB0ajh4MzVhIn0.ILZccnn56j_cYHWwSijPhQ'
 }).addTo(map);
 
-var geojsonLayer = new L.GeoJSON.AJAX("india_state_geo.json");       
+var geojsonLayer = new L.GeoJSON.AJAX("Admin2.json");       
 geojsonLayer.addTo(map);
 
 var temp;
 async function mapdata(){
-    fetch('india_state_geo.json').then(response=>{
+    fetch('geo.geojson.txt').then(response=>{
         return response.json();
     })
     .then(data=>temp=data);
@@ -32,7 +32,7 @@ map.on('click',function(e){
     var latlon=e.latlng;
     var popup = L.popup()
     .setLatLng([latlon.lat,latlon.lng])
-    .setContent('lattitude '+latlon.lat+' and longitude '+latlon.lng)
+    .setContent(latlon.lat+'°N '+latlon.lng+'°E')
     .openOn(map);
     
 })
